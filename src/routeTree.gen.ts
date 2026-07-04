@@ -10,14 +10,33 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as SoftwareRouteImport } from './routes/software'
+import { Route as SignupRouteImport } from './routes/signup'
 import { Route as RestaurantIqRouteImport } from './routes/restaurant-iq'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as DemoRouteImport } from './routes/demo'
+import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as DashboardIndexRouteImport } from './routes/dashboard.index'
+import { Route as DashboardTeamRouteImport } from './routes/dashboard.team'
+import { Route as DashboardTallyRouteImport } from './routes/dashboard.tally'
+import { Route as DashboardSuppliersRouteImport } from './routes/dashboard.suppliers'
+import { Route as DashboardSettingsRouteImport } from './routes/dashboard.settings'
+import { Route as DashboardReviewsRouteImport } from './routes/dashboard.reviews'
+import { Route as DashboardReportsRouteImport } from './routes/dashboard.reports'
+import { Route as DashboardProfileRouteImport } from './routes/dashboard.profile'
+import { Route as DashboardPosRouteImport } from './routes/dashboard.pos'
+import { Route as DashboardInventoryRouteImport } from './routes/dashboard.inventory'
+import { Route as DashboardBranchesRouteImport } from './routes/dashboard.branches'
+import { Route as DashboardAiRouteImport } from './routes/dashboard.ai'
 
 const SoftwareRoute = SoftwareRouteImport.update({
   id: '/software',
   path: '/software',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SignupRoute = SignupRouteImport.update({
+  id: '/signup',
+  path: '/signup',
   getParentRoute: () => rootRouteImport,
 } as any)
 const RestaurantIqRoute = RestaurantIqRouteImport.update({
@@ -35,47 +54,212 @@ const DemoRoute = DemoRouteImport.update({
   path: '/demo',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DashboardRoute = DashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DashboardIndexRoute = DashboardIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => DashboardRoute,
+} as any)
+const DashboardTeamRoute = DashboardTeamRouteImport.update({
+  id: '/team',
+  path: '/team',
+  getParentRoute: () => DashboardRoute,
+} as any)
+const DashboardTallyRoute = DashboardTallyRouteImport.update({
+  id: '/tally',
+  path: '/tally',
+  getParentRoute: () => DashboardRoute,
+} as any)
+const DashboardSuppliersRoute = DashboardSuppliersRouteImport.update({
+  id: '/suppliers',
+  path: '/suppliers',
+  getParentRoute: () => DashboardRoute,
+} as any)
+const DashboardSettingsRoute = DashboardSettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => DashboardRoute,
+} as any)
+const DashboardReviewsRoute = DashboardReviewsRouteImport.update({
+  id: '/reviews',
+  path: '/reviews',
+  getParentRoute: () => DashboardRoute,
+} as any)
+const DashboardReportsRoute = DashboardReportsRouteImport.update({
+  id: '/reports',
+  path: '/reports',
+  getParentRoute: () => DashboardRoute,
+} as any)
+const DashboardProfileRoute = DashboardProfileRouteImport.update({
+  id: '/profile',
+  path: '/profile',
+  getParentRoute: () => DashboardRoute,
+} as any)
+const DashboardPosRoute = DashboardPosRouteImport.update({
+  id: '/pos',
+  path: '/pos',
+  getParentRoute: () => DashboardRoute,
+} as any)
+const DashboardInventoryRoute = DashboardInventoryRouteImport.update({
+  id: '/inventory',
+  path: '/inventory',
+  getParentRoute: () => DashboardRoute,
+} as any)
+const DashboardBranchesRoute = DashboardBranchesRouteImport.update({
+  id: '/branches',
+  path: '/branches',
+  getParentRoute: () => DashboardRoute,
+} as any)
+const DashboardAiRoute = DashboardAiRouteImport.update({
+  id: '/ai',
+  path: '/ai',
+  getParentRoute: () => DashboardRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/dashboard': typeof DashboardRouteWithChildren
   '/demo': typeof DemoRoute
   '/login': typeof LoginRoute
   '/restaurant-iq': typeof RestaurantIqRoute
+  '/signup': typeof SignupRoute
   '/software': typeof SoftwareRoute
+  '/dashboard/ai': typeof DashboardAiRoute
+  '/dashboard/branches': typeof DashboardBranchesRoute
+  '/dashboard/inventory': typeof DashboardInventoryRoute
+  '/dashboard/pos': typeof DashboardPosRoute
+  '/dashboard/profile': typeof DashboardProfileRoute
+  '/dashboard/reports': typeof DashboardReportsRoute
+  '/dashboard/reviews': typeof DashboardReviewsRoute
+  '/dashboard/settings': typeof DashboardSettingsRoute
+  '/dashboard/suppliers': typeof DashboardSuppliersRoute
+  '/dashboard/tally': typeof DashboardTallyRoute
+  '/dashboard/team': typeof DashboardTeamRoute
+  '/dashboard/': typeof DashboardIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/demo': typeof DemoRoute
   '/login': typeof LoginRoute
   '/restaurant-iq': typeof RestaurantIqRoute
+  '/signup': typeof SignupRoute
   '/software': typeof SoftwareRoute
+  '/dashboard/ai': typeof DashboardAiRoute
+  '/dashboard/branches': typeof DashboardBranchesRoute
+  '/dashboard/inventory': typeof DashboardInventoryRoute
+  '/dashboard/pos': typeof DashboardPosRoute
+  '/dashboard/profile': typeof DashboardProfileRoute
+  '/dashboard/reports': typeof DashboardReportsRoute
+  '/dashboard/reviews': typeof DashboardReviewsRoute
+  '/dashboard/settings': typeof DashboardSettingsRoute
+  '/dashboard/suppliers': typeof DashboardSuppliersRoute
+  '/dashboard/tally': typeof DashboardTallyRoute
+  '/dashboard/team': typeof DashboardTeamRoute
+  '/dashboard': typeof DashboardIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/dashboard': typeof DashboardRouteWithChildren
   '/demo': typeof DemoRoute
   '/login': typeof LoginRoute
   '/restaurant-iq': typeof RestaurantIqRoute
+  '/signup': typeof SignupRoute
   '/software': typeof SoftwareRoute
+  '/dashboard/ai': typeof DashboardAiRoute
+  '/dashboard/branches': typeof DashboardBranchesRoute
+  '/dashboard/inventory': typeof DashboardInventoryRoute
+  '/dashboard/pos': typeof DashboardPosRoute
+  '/dashboard/profile': typeof DashboardProfileRoute
+  '/dashboard/reports': typeof DashboardReportsRoute
+  '/dashboard/reviews': typeof DashboardReviewsRoute
+  '/dashboard/settings': typeof DashboardSettingsRoute
+  '/dashboard/suppliers': typeof DashboardSuppliersRoute
+  '/dashboard/tally': typeof DashboardTallyRoute
+  '/dashboard/team': typeof DashboardTeamRoute
+  '/dashboard/': typeof DashboardIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/demo' | '/login' | '/restaurant-iq' | '/software'
+  fullPaths:
+    | '/'
+    | '/dashboard'
+    | '/demo'
+    | '/login'
+    | '/restaurant-iq'
+    | '/signup'
+    | '/software'
+    | '/dashboard/ai'
+    | '/dashboard/branches'
+    | '/dashboard/inventory'
+    | '/dashboard/pos'
+    | '/dashboard/profile'
+    | '/dashboard/reports'
+    | '/dashboard/reviews'
+    | '/dashboard/settings'
+    | '/dashboard/suppliers'
+    | '/dashboard/tally'
+    | '/dashboard/team'
+    | '/dashboard/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/demo' | '/login' | '/restaurant-iq' | '/software'
-  id: '__root__' | '/' | '/demo' | '/login' | '/restaurant-iq' | '/software'
+  to:
+    | '/'
+    | '/demo'
+    | '/login'
+    | '/restaurant-iq'
+    | '/signup'
+    | '/software'
+    | '/dashboard/ai'
+    | '/dashboard/branches'
+    | '/dashboard/inventory'
+    | '/dashboard/pos'
+    | '/dashboard/profile'
+    | '/dashboard/reports'
+    | '/dashboard/reviews'
+    | '/dashboard/settings'
+    | '/dashboard/suppliers'
+    | '/dashboard/tally'
+    | '/dashboard/team'
+    | '/dashboard'
+  id:
+    | '__root__'
+    | '/'
+    | '/dashboard'
+    | '/demo'
+    | '/login'
+    | '/restaurant-iq'
+    | '/signup'
+    | '/software'
+    | '/dashboard/ai'
+    | '/dashboard/branches'
+    | '/dashboard/inventory'
+    | '/dashboard/pos'
+    | '/dashboard/profile'
+    | '/dashboard/reports'
+    | '/dashboard/reviews'
+    | '/dashboard/settings'
+    | '/dashboard/suppliers'
+    | '/dashboard/tally'
+    | '/dashboard/team'
+    | '/dashboard/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  DashboardRoute: typeof DashboardRouteWithChildren
   DemoRoute: typeof DemoRoute
   LoginRoute: typeof LoginRoute
   RestaurantIqRoute: typeof RestaurantIqRoute
+  SignupRoute: typeof SignupRoute
   SoftwareRoute: typeof SoftwareRoute
 }
 
@@ -86,6 +270,13 @@ declare module '@tanstack/react-router' {
       path: '/software'
       fullPath: '/software'
       preLoaderRoute: typeof SoftwareRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/signup': {
+      id: '/signup'
+      path: '/signup'
+      fullPath: '/signup'
+      preLoaderRoute: typeof SignupRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/restaurant-iq': {
@@ -109,6 +300,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DemoRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/dashboard': {
+      id: '/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof DashboardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -116,14 +314,134 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/dashboard/': {
+      id: '/dashboard/'
+      path: '/'
+      fullPath: '/dashboard/'
+      preLoaderRoute: typeof DashboardIndexRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/dashboard/team': {
+      id: '/dashboard/team'
+      path: '/team'
+      fullPath: '/dashboard/team'
+      preLoaderRoute: typeof DashboardTeamRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/dashboard/tally': {
+      id: '/dashboard/tally'
+      path: '/tally'
+      fullPath: '/dashboard/tally'
+      preLoaderRoute: typeof DashboardTallyRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/dashboard/suppliers': {
+      id: '/dashboard/suppliers'
+      path: '/suppliers'
+      fullPath: '/dashboard/suppliers'
+      preLoaderRoute: typeof DashboardSuppliersRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/dashboard/settings': {
+      id: '/dashboard/settings'
+      path: '/settings'
+      fullPath: '/dashboard/settings'
+      preLoaderRoute: typeof DashboardSettingsRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/dashboard/reviews': {
+      id: '/dashboard/reviews'
+      path: '/reviews'
+      fullPath: '/dashboard/reviews'
+      preLoaderRoute: typeof DashboardReviewsRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/dashboard/reports': {
+      id: '/dashboard/reports'
+      path: '/reports'
+      fullPath: '/dashboard/reports'
+      preLoaderRoute: typeof DashboardReportsRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/dashboard/profile': {
+      id: '/dashboard/profile'
+      path: '/profile'
+      fullPath: '/dashboard/profile'
+      preLoaderRoute: typeof DashboardProfileRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/dashboard/pos': {
+      id: '/dashboard/pos'
+      path: '/pos'
+      fullPath: '/dashboard/pos'
+      preLoaderRoute: typeof DashboardPosRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/dashboard/inventory': {
+      id: '/dashboard/inventory'
+      path: '/inventory'
+      fullPath: '/dashboard/inventory'
+      preLoaderRoute: typeof DashboardInventoryRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/dashboard/branches': {
+      id: '/dashboard/branches'
+      path: '/branches'
+      fullPath: '/dashboard/branches'
+      preLoaderRoute: typeof DashboardBranchesRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/dashboard/ai': {
+      id: '/dashboard/ai'
+      path: '/ai'
+      fullPath: '/dashboard/ai'
+      preLoaderRoute: typeof DashboardAiRouteImport
+      parentRoute: typeof DashboardRoute
+    }
   }
 }
 
+interface DashboardRouteChildren {
+  DashboardAiRoute: typeof DashboardAiRoute
+  DashboardBranchesRoute: typeof DashboardBranchesRoute
+  DashboardInventoryRoute: typeof DashboardInventoryRoute
+  DashboardPosRoute: typeof DashboardPosRoute
+  DashboardProfileRoute: typeof DashboardProfileRoute
+  DashboardReportsRoute: typeof DashboardReportsRoute
+  DashboardReviewsRoute: typeof DashboardReviewsRoute
+  DashboardSettingsRoute: typeof DashboardSettingsRoute
+  DashboardSuppliersRoute: typeof DashboardSuppliersRoute
+  DashboardTallyRoute: typeof DashboardTallyRoute
+  DashboardTeamRoute: typeof DashboardTeamRoute
+  DashboardIndexRoute: typeof DashboardIndexRoute
+}
+
+const DashboardRouteChildren: DashboardRouteChildren = {
+  DashboardAiRoute: DashboardAiRoute,
+  DashboardBranchesRoute: DashboardBranchesRoute,
+  DashboardInventoryRoute: DashboardInventoryRoute,
+  DashboardPosRoute: DashboardPosRoute,
+  DashboardProfileRoute: DashboardProfileRoute,
+  DashboardReportsRoute: DashboardReportsRoute,
+  DashboardReviewsRoute: DashboardReviewsRoute,
+  DashboardSettingsRoute: DashboardSettingsRoute,
+  DashboardSuppliersRoute: DashboardSuppliersRoute,
+  DashboardTallyRoute: DashboardTallyRoute,
+  DashboardTeamRoute: DashboardTeamRoute,
+  DashboardIndexRoute: DashboardIndexRoute,
+}
+
+const DashboardRouteWithChildren = DashboardRoute._addFileChildren(
+  DashboardRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  DashboardRoute: DashboardRouteWithChildren,
   DemoRoute: DemoRoute,
   LoginRoute: LoginRoute,
   RestaurantIqRoute: RestaurantIqRoute,
+  SignupRoute: SignupRoute,
   SoftwareRoute: SoftwareRoute,
 }
 export const routeTree = rootRouteImport

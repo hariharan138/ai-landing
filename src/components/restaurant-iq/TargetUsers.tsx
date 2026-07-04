@@ -1,11 +1,31 @@
 import { Store, Building2, Coffee, CloudCog, Users } from "lucide-react";
 
 const users = [
-  { icon: Store, title: "Restaurant Owners", desc: "Single-outlet operators who want clarity without hiring an analyst." },
-  { icon: Building2, title: "Multi-Branch Operators", desc: "Groups running 3+ outlets needing one unified view of performance." },
-  { icon: Coffee, title: "Cafe Owners", desc: "Specialty cafes optimising ingredient costs and daily prep." },
-  { icon: CloudCog, title: "Cloud Kitchen Operators", desc: "Delivery-first brands juggling Swiggy, Zomato, and direct orders." },
-  { icon: Users, title: "Small Food Business Managers", desc: "QSRs, bakeries, and tiffin services scaling without losing control." },
+  {
+    icon: Store,
+    title: "Restaurant Owners",
+    desc: "Single-outlet operators who want clarity without hiring an analyst.",
+  },
+  {
+    icon: Building2,
+    title: "Multi-Branch Operators",
+    desc: "Groups running 3+ outlets needing one unified view of performance.",
+  },
+  {
+    icon: Coffee,
+    title: "Cafe Owners",
+    desc: "Specialty cafes optimising ingredient costs and daily prep.",
+  },
+  {
+    icon: CloudCog,
+    title: "Cloud Kitchen Operators",
+    desc: "Delivery-first brands juggling Swiggy, Zomato, and direct orders.",
+  },
+  {
+    icon: Users,
+    title: "Small Food Business Managers",
+    desc: "QSRs, bakeries, and tiffin services scaling without losing control.",
+  },
 ];
 
 export function TargetUsers() {

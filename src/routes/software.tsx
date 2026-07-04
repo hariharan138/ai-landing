@@ -95,10 +95,7 @@ function PlatformCard({
       <a href="#contact" className="sw-card-cta" style={{ color: accent }}>
         {cta} →
       </a>
-      <div
-        className="sw-card-line"
-        style={{ background: accent }}
-      />
+      <div className="sw-card-line" style={{ background: accent }} />
     </div>
   );
 }
@@ -608,17 +605,19 @@ function SoftwarePage() {
       <section className="sw-hero">
         <div className="sw-hero-eyebrow">OUR SOFTWARE</div>
         <h1 className="sw-hero-h1">
-          Our software powers{" "}
-          <em>realtime AI-driven</em>
-          {" "}analysis and decision
+          Our software powers <em>realtime AI-driven</em> analysis and decision
         </h1>
         <p className="sw-hero-sub">
-          From raw signal to decisive action in milliseconds. Built on an
-          AI+Human loop that keeps operators in command and machines in service.
+          From raw signal to decisive action in milliseconds. Built on an AI+Human loop that keeps
+          operators in command and machines in service.
         </p>
         <div className="sw-hero-actions">
-          <a href="#platforms" className="sw-btn-primary">EXPLORE PLATFORMS</a>
-          <a href="#loop" className="sw-btn-outline">SEE THE AI+HUMAN LOOP</a>
+          <a href="#platforms" className="sw-btn-primary">
+            EXPLORE PLATFORMS
+          </a>
+          <a href="#loop" className="sw-btn-outline">
+            SEE THE AI+HUMAN LOOP
+          </a>
         </div>
       </section>
 
@@ -646,12 +645,10 @@ function SoftwarePage() {
       {/* ── Platform cards ──────────────────────────────────────────────── */}
       <section className="sw-section" id="platforms">
         <div className="sw-section-tag">↳ Platforms</div>
-        <h2 className="sw-section-h2">
-          Foundational Software of Tomorrow. Delivered Today.
-        </h2>
+        <h2 className="sw-section-h2">Foundational Software of Tomorrow. Delivered Today.</h2>
         <p className="sw-section-body">
-          Every platform is purpose-built for the hardest operational
-          environments — from battlefield command to enterprise supply chains.
+          Every platform is purpose-built for the hardest operational environments — from
+          battlefield command to enterprise supply chains.
         </p>
         <div className="sw-cards-grid">
           <PlatformCard
@@ -692,9 +689,7 @@ function SoftwarePage() {
       {/* ── Tabs: capabilities ──────────────────────────────────────────── */}
       <section className="sw-section" style={{ paddingTop: 0 }}>
         <div className="sw-section-tag">↳ Capabilities</div>
-        <h2 className="sw-section-h2">
-          Three capabilities. One coherent operating picture.
-        </h2>
+        <h2 className="sw-section-h2">Three capabilities. One coherent operating picture.</h2>
         <div className="sw-tabs-wrap">
           <div className="sw-tabs-bar">
             {tabs.map((t, i) => (
@@ -726,13 +721,10 @@ function SoftwarePage() {
       {/* ── AI+Human loop ───────────────────────────────────────────────── */}
       <section className="sw-loop-section" id="loop">
         <div className="sw-section-tag">↳ AI+Human Loop Decision</div>
-        <h2 className="sw-section-h2">
-          AI+Human loop decision making
-        </h2>
+        <h2 className="sw-section-h2">AI+Human loop decision making</h2>
         <p className="sw-section-body">
-          The loop never closes without a human checkpoint. Every AI
-          recommendation is inspectable, overrideable, and teaches the system
-          to be better next time.
+          The loop never closes without a human checkpoint. Every AI recommendation is inspectable,
+          overrideable, and teaches the system to be better next time.
         </p>
         <div className="sw-loop-grid">
           <div className="sw-loop-arrow" />
@@ -778,20 +770,22 @@ function SoftwarePage() {
       {/* ── Quote ───────────────────────────────────────────────────────── */}
       <div className="sw-quote-strip">
         <p className="sw-quote">
-          "The most powerful decisions emerge when AI amplifies human judgment
-          — not when it replaces it."
+          "The most powerful decisions emerge when AI amplifies human judgment — not when it
+          replaces it."
         </p>
         <div className="sw-quote-attr">— Agorix Software Design Principles</div>
       </div>
 
       {/* ── CTA band ────────────────────────────────────────────────────── */}
       <div className="sw-cta-band" id="contact">
-        <h2 className="sw-cta-heading">
-          Ready to get AI into your operations?
-        </h2>
+        <h2 className="sw-cta-heading">Ready to get AI into your operations?</h2>
         <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
-          <a href="#schedule" className="sw-btn-primary">SCHEDULE A DEMO</a>
-          <a href="#bootcamp" className="sw-btn-outline">RUN A BOOTCAMP</a>
+          <a href="#schedule" className="sw-btn-primary">
+            SCHEDULE A DEMO
+          </a>
+          <a href="#bootcamp" className="sw-btn-outline">
+            RUN A BOOTCAMP
+          </a>
         </div>
       </div>
 

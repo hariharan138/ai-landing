@@ -21,7 +21,10 @@ interface RadialOrbitalTimelineProps {
   timelineData: TimelineItem[];
 }
 
-export default function RadialOrbitalTimeline({ timelineData, className = "" }: RadialOrbitalTimelineProps & { className?: string }) {
+export default function RadialOrbitalTimeline({
+  timelineData,
+  className = "",
+}: RadialOrbitalTimelineProps & { className?: string }) {
   const [expandedItems, setExpandedItems] = useState<Record<number, boolean>>({});
   const [viewMode, setViewMode] = useState<"orbital">("orbital");
   const [rotationAngle, setRotationAngle] = useState<number>(0);
@@ -215,10 +218,10 @@ export default function RadialOrbitalTimeline({ timelineData, className = "" }: 
                   w-10 h-10 rounded-full flex items-center justify-center
                   ${
                     isExpanded
-                        ? "bg-white text-black"
-                        : isRelated
-                          ? "bg-white/50 text-black"
-                          : "bg-[#111113] text-white"
+                      ? "bg-white text-black"
+                      : isRelated
+                        ? "bg-white/50 text-black"
+                        : "bg-[#111113] text-white"
                   }
                   border-2 
                   ${
@@ -275,7 +278,7 @@ export default function RadialOrbitalTimeline({ timelineData, className = "" }: 
                         </div>
                         <div className="w-full h-1 bg-white/10 rounded-full overflow-hidden">
                           <div
-                            className="h-full bg-gradient-to-r from-blue-500 to-purple-500"
+                            className="h-full bg-gradient-to-r from-purple-500 to-fuchsia-500"
                             style={{ width: `${item.energy}%` }}
                           ></div>
                         </div>

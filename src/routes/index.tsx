@@ -1,15 +1,16 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import { Antenna, Brain, Crosshair, RefreshCw, User, Zap } from "lucide-react";
-import heroBg from "@/assets/hero-bg.png.asset.json";
-import { NavBar } from "@/components/NavBar";
-
+import { AgorixHero } from "@/components/AgorixHero";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
       { title: "Agorix — The Superintelligence AI-Automation" },
-      { name: "description", content: "AI-Powered Operating system. Launch a GPU instance or talk to our team." },
+      {
+        name: "description",
+        content: "AI-Powered Operating system. Launch a GPU instance or talk to our team.",
+      },
       { property: "og:title", content: "Agorix — The Superintelligence AI-Automation" },
       { property: "og:description", content: "AI-Powered Operating system." },
     ],
@@ -96,7 +97,10 @@ function ParticleField() {
       mouse.x = e.clientX - rect.left;
       mouse.y = e.clientY - rect.top;
     };
-    const onLeave = () => { mouse.x = -9999; mouse.y = -9999; };
+    const onLeave = () => {
+      mouse.x = -9999;
+      mouse.y = -9999;
+    };
     window.addEventListener("mousemove", onMove);
     window.addEventListener("mouseout", onLeave);
 
@@ -172,8 +176,13 @@ function useReveal(threshold = 0.18) {
     const el = ref.current;
     if (!el) return;
     const obs = new IntersectionObserver(
-      ([entry]) => { if (entry.isIntersecting) { setVisible(true); obs.disconnect(); } },
-      { threshold }
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setVisible(true);
+          obs.disconnect();
+        }
+      },
+      { threshold },
     );
     obs.observe(el);
     return () => obs.disconnect();
@@ -182,30 +191,47 @@ function useReveal(threshold = 0.18) {
 }
 
 /* ─── Animated counter ───────────────────────────────────────────────────── */
-function Counter({ to, suffix = "", prefix = "" }: { to: number; suffix?: string; prefix?: string }) {
+function Counter({
+  to,
+  suffix = "",
+  prefix = "",
+}: {
+  to: number;
+  suffix?: string;
+  prefix?: string;
+}) {
   const [n, setN] = useState(0);
   const ref = useRef<HTMLSpanElement | null>(null);
   const started = useRef(false);
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
-    const obs = new IntersectionObserver(([e]) => {
-      if (e.isIntersecting && !started.current) {
-        started.current = true;
-        const t0 = performance.now();
-        const dur = 1600;
-        const tick = (now: number) => {
-          const p = Math.min((now - t0) / dur, 1);
-          setN(Math.round((1 - Math.pow(1 - p, 3)) * to));
-          if (p < 1) requestAnimationFrame(tick);
-        };
-        requestAnimationFrame(tick);
-      }
-    }, { threshold: 0.3 });
+    const obs = new IntersectionObserver(
+      ([e]) => {
+        if (e.isIntersecting && !started.current) {
+          started.current = true;
+          const t0 = performance.now();
+          const dur = 1600;
+          const tick = (now: number) => {
+            const p = Math.min((now - t0) / dur, 1);
+            setN(Math.round((1 - Math.pow(1 - p, 3)) * to));
+            if (p < 1) requestAnimationFrame(tick);
+          };
+          requestAnimationFrame(tick);
+        }
+      },
+      { threshold: 0.3 },
+    );
     obs.observe(el);
     return () => obs.disconnect();
   }, [to]);
-  return <span ref={ref}>{prefix}{n.toLocaleString()}{suffix}</span>;
+  return (
+    <span ref={ref}>
+      {prefix}
+      {n.toLocaleString()}
+      {suffix}
+    </span>
+  );
 }
 
 /* ─── Typing text ────────────────────────────────────────────────────────── */
@@ -218,14 +244,14 @@ function TypeWriter({ lines }: { lines: string[] }) {
     const current = lines[lineIdx];
     let timeout: ReturnType<typeof setTimeout>;
     if (!deleting && charIdx < current.length) {
-      timeout = setTimeout(() => setCharIdx(c => c + 1), 55);
+      timeout = setTimeout(() => setCharIdx((c) => c + 1), 55);
     } else if (!deleting && charIdx === current.length) {
       timeout = setTimeout(() => setDeleting(true), 2200);
     } else if (deleting && charIdx > 0) {
-      timeout = setTimeout(() => setCharIdx(c => c - 1), 28);
+      timeout = setTimeout(() => setCharIdx((c) => c - 1), 28);
     } else if (deleting && charIdx === 0) {
       setDeleting(false);
-      setLineIdx(i => (i + 1) % lines.length);
+      setLineIdx((i) => (i + 1) % lines.length);
     }
     return () => clearTimeout(timeout);
   }, [charIdx, deleting, lineIdx, lines]);
@@ -317,22 +343,110 @@ function Index() {
   ];
 
   const loopSteps = [
-          { icon: Antenna, step: "Ingest", desc: "Live streams, sensors, APIs, and unstructured feeds unified in realtime" },
-          { icon: Brain, step: "Analyze", desc: "Multi-model inference fuses data into a ranked, explainable intelligence layer" },
-          { icon: Zap, step: "Recommend", desc: "The AI surfaces prioritized actions with calibrated confidence and rationale" },
-          { icon: User, step: "Human Review", desc: "Operators inspect, approve, modify, or override every AI recommendation" },
-          { icon: Crosshair, step: "Act", desc: "Approved decisions execute instantly across connected systems and workflows" },
-          { icon: RefreshCw, step: "Learn", desc: "Every human correction feeds back, continuously improving model accuracy" },
-        ];
+    {
+      icon: Antenna,
+      step: "Ingest",
+      desc: "Live streams, sensors, APIs, and unstructured feeds unified in realtime",
+    },
+    {
+      icon: Brain,
+      step: "Analyze",
+      desc: "Multi-model inference fuses data into a ranked, explainable intelligence layer",
+    },
+    {
+      icon: Zap,
+      step: "Recommend",
+      desc: "The AI surfaces prioritized actions with calibrated confidence and rationale",
+    },
+    {
+      icon: User,
+      step: "Human Review",
+      desc: "Operators inspect, approve, modify, or override every AI recommendation",
+    },
+    {
+      icon: Crosshair,
+      step: "Act",
+      desc: "Approved decisions execute instantly across connected systems and workflows",
+    },
+    {
+      icon: RefreshCw,
+      step: "Learn",
+      desc: "Every human correction feeds back, continuously improving model accuracy",
+    },
+  ];
 
   return (
-    <main style={{ background: "#111113", color: "#fff", fontFamily: "'Inter', system-ui, sans-serif", overflowX: "hidden" }}>
+    <main
+      style={{
+        background: "#111113",
+        color: "#fff",
+        fontFamily: "'Inter', system-ui, sans-serif",
+        overflowX: "clip",
+      }}
+    >
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
 
         /* ── Shared resets ── */
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        a { text-decoration: none; color: inherit; }
+        main a { text-decoration: none; }
+
+        /* ── Hero shell ── */
+        .hero-shell {
+          position: relative;
+          isolation: isolate;
+          display: grid;
+          grid-template-areas: "hero";
+          min-height: 100vh;
+        }
+
+        .hero-shell > .sw-nav-shell {
+          grid-area: hero;
+          align-self: start;
+        }
+
+        .hero-shell > .relative.min-h-screen {
+          grid-area: hero;
+          min-height: 100vh;
+          width: 100%;
+        }
+
+        .hero-copy {
+          gap: clamp(1.75rem, 4vw, 2.5rem);
+        }
+
+        .hero-copy h1,
+        .hero-copy p {
+          text-align: center;
+        }
+
+        .hero-description {
+          max-width: 36rem;
+          margin-inline: auto;
+          font-size: clamp(1rem, 2.2vw, 1.25rem);
+          line-height: 1.65;
+          font-weight: 300;
+          color: rgba(255, 255, 255, 0.45);
+          hyphens: none;
+          text-wrap: balance;
+        }
+
+        .hero-description-line {
+          display: block;
+        }
+
+        .hero-description-line + .hero-description-line {
+          margin-top: 0.2em;
+        }
+
+        /* ── Hero CTA row ── */
+        .hero-cta-row {
+          display: inline-flex;
+          flex-wrap: wrap;
+          align-items: center;
+          justify-content: center;
+          gap: 0.75rem;
+        }
 
         /* ── Cursor blink ── */
         .sw-cursor { animation: blink 1s step-end infinite; opacity: 1; }
@@ -410,30 +524,40 @@ function Index() {
         .intro-ctas { margin-top: 2.5rem; display: flex; gap: 1rem; flex-wrap: wrap; }
         .btn-white {
           background: #fff;
-          color: #080808;
+          color: #080808 !important;
           font-size: 0.68rem;
           font-weight: 700;
           letter-spacing: 0.18em;
-          padding: 0.75rem 1.75rem;
-          border: none;
+          padding: 0.85rem 1.75rem;
+          border: 1px solid rgba(255, 255, 255, 0.08);
+          border-radius: 9999px;
           cursor: pointer;
           transition: background 0.2s, transform 0.15s;
-          display: inline-block;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          min-height: 3rem;
+          line-height: 1;
         }
-        .btn-white:hover { background: #ccc; transform: translateY(-2px); }
+        .btn-white:hover { background: #e8e8e8; transform: translateY(-1px); }
         .btn-ghost {
           background: transparent;
-          color: rgba(255,255,255,0.55);
+          color: rgba(255,255,255,0.72) !important;
           font-size: 0.68rem;
           font-weight: 700;
           letter-spacing: 0.18em;
-          padding: 0.75rem 1.75rem;
-          border: 1px solid rgba(255,255,255,0.14);
+          padding: 0.85rem 1.75rem;
+          border: 1px solid rgba(255,255,255,0.22);
+          border-radius: 9999px;
           cursor: pointer;
-          transition: border-color 0.2s, color 0.2s, transform 0.15s;
-          display: inline-block;
+          transition: border-color 0.2s, color 0.2s, transform 0.15s, background 0.2s;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          min-height: 3rem;
+          line-height: 1;
         }
-        .btn-ghost:hover { border-color: rgba(255,255,255,0.4); color: #fff; transform: translateY(-2px); }
+        .btn-ghost:hover { border-color: rgba(255,255,255,0.45); color: #fff !important; background: rgba(255,255,255,0.04); transform: translateY(-1px); }
 
         /* ── Ticker / typewriter strip ── */
         .ticker-strip {
@@ -1027,36 +1151,7 @@ function Index() {
       {/* ══════════════════════════════════════════════════════════════════ */}
       {/* HERO                                                               */}
       {/* ══════════════════════════════════════════════════════════════════ */}
-      <div className="hero-wrap">
-        <div
-          aria-hidden
-          className="absolute inset-0 bg-cover bg-center bg-drift bg-hue will-change-transform"
-          style={{ backgroundImage: `url(${heroBg.url})` }}
-        />
-        <div aria-hidden className="pointer-events-none absolute inset-0 bg-shimmer" />
-        <div aria-hidden className="pointer-events-none absolute inset-0 z-[4] bg-black/45" />
-        <ParticleField />
-
-        <div className="relative z-10 flex min-h-screen flex-col">
-        {/* Nav */}
-        <NavBar />
-
-          {/* Hero copy */}
-          <section className="flex flex-1 flex-col items-center justify-center px-6 pb-24 text-center">
-            <p className="mb-6 text-lg font-medium text-white/90 md:text-xl">
-              AI-Powered Operating system
-            </p>
-            <GlitchHeading text={"The Superintelligence\nAI-Automation"} />
-          </section>
-
-          {/* Spark mark */}
-          <div className="absolute bottom-6 right-8 text-white/80">
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M12 2 L13.5 9 L20 10.5 L13.5 12 L12 19 L10.5 12 L4 10.5 L10.5 9 Z" />
-            </svg>
-          </div>
-        </div>
-      </div>
+      <AgorixHero />
 
       {/* ══════════════════════════════════════════════════════════════════ */}
       {/* TYPEWRITER TICKER                                                  */}
@@ -1086,15 +1181,16 @@ function Index() {
           <div>
             <div className="sw-eyebrow">Our Software</div>
             <h2 className="intro-h2">
-              Our software powers <span className="gradient-text">realtime AI&#8209;driven</span> analysis and decision
+              Our software powers <span className="gradient-text-a">realtime</span>{" "}
+              <span className="gradient-text-b">AI&#8209;driven</span> analysis and decision
             </h2>
           </div>
           <div>
             <p className="intro-body">
-              We build the foundational software that empowers organizations to
-              effectively integrate their <strong>data</strong>,{" "}
-              <strong>decisions</strong>, and <strong>operations</strong> — in
-              real time, at any scale, with humans always in the loop.
+              We build the foundational software that empowers organizations to effectively
+              integrate their <strong>data</strong>, <strong>decisions</strong>, and{" "}
+              <strong>operations</strong> — in real time, at any scale, with humans always in the
+              loop.
             </p>
           </div>
         </div>
@@ -1130,10 +1226,7 @@ function Index() {
       {/* ══════════════════════════════════════════════════════════════════ */}
       <div className="sw-rule" id="platforms" />
       <div className="sw-section">
-        <div
-          ref={sec3.ref}
-          className={`platforms-section reveal${sec3.visible ? " show" : ""}`}
-        >
+        <div ref={sec3.ref} className={`platforms-section reveal${sec3.visible ? " show" : ""}`}>
           {/* <div className="platforms-header">
             <div>
               <div className="sw-eyebrow">Platforms</div>
@@ -1147,7 +1240,6 @@ function Index() {
               and financial markets.
             </p>
           </div> */}
-
 
           {/* {platforms.map((p, i) => (
             <div
@@ -1169,49 +1261,45 @@ function Index() {
               </a>
             </div>
           ))} */}
-        <div className="sw-section-tag">↳ Platforms</div>
-        <h2 className="sw-section-h2">
-          Foundational Software of Tomorrow. Delivered Today.
-        </h2>
-        <p className="sw-section-body">
-          Every platform is purpose-built for the hardest operational
-          environments.
-        </p>
-        <div className="sw-cards-grid">
-          <PlatformCard
-            number="01 "
-            tag="AIP"
-            title="Get AI Into Operations"
-            description="Deploy large language models and generative AI directly into your most critical workflows. From zero to use case in days, not months."
-            cta="Explore AIP"
-            accent="#7c6fff"
-          />
-          <PlatformCard
-            number="02 "
-            tag="NEXUS"
-            title="Realtime Decision Intelligence"
-            description="A unified command surface that fuses live sensor data, predictive models, and operator judgment into one coherent operational picture."
-            cta="Explore Nexus"
-            accent="#5bc8ff"
-          />
-          <PlatformCard
-            number="03 "
-            tag="BOSON"
-            title="Operating System for the Enterprise"
-            description="Connect every data source, transform it into living ontologies, and build applications your teams actually use — no-code to full-code."
-            cta="Explore BOSON"
-            accent="#a8ff78"
-          />
-          <PlatformCard
-            number="04 "
-            tag="SYNAPSE"
-            title="Continuous Delivery at Any Scale"
-            description="Software orchestration that keeps AI models and applications current across every environment — cloud, on-prem, disconnected, and classified."
-            cta="Explore SYNAPSE"
-            accent="#ffb347"
-          />
-        </div>
-
+          <div className="sw-section-tag">↳ Platforms</div>
+          <h2 className="sw-section-h2">Foundational Software of Tomorrow. Delivered Today.</h2>
+          <p className="sw-section-body">
+            Every platform is purpose-built for the hardest operational environments.
+          </p>
+          <div className="sw-cards-grid">
+            <PlatformCard
+              number="01 "
+              tag="AIP"
+              title="Get AI Into Operations"
+              description="Deploy large language models and generative AI directly into your most critical workflows. From zero to use case in days, not months."
+              cta="Explore AIP"
+              accent="#7c6fff"
+            />
+            <PlatformCard
+              number="02 "
+              tag="NEXUS"
+              title="Realtime Decision Intelligence"
+              description="A unified command surface that fuses live sensor data, predictive models, and operator judgment into one coherent operational picture."
+              cta="Explore Nexus"
+              accent="#5bc8ff"
+            />
+            <PlatformCard
+              number="03 "
+              tag="BOSON"
+              title="Operating System for the Enterprise"
+              description="Connect every data source, transform it into living ontologies, and build applications your teams actually use — no-code to full-code."
+              cta="Explore BOSON"
+              accent="#a8ff78"
+            />
+            <PlatformCard
+              number="04 "
+              tag="SYNAPSE"
+              title="Continuous Delivery at Any Scale"
+              description="Software orchestration that keeps AI models and applications current across every environment — cloud, on-prem, disconnected, and classified."
+              cta="Explore SYNAPSE"
+              accent="#ffb347"
+            />
+          </div>
         </div>
       </div>
 
@@ -1220,14 +1308,9 @@ function Index() {
       {/* ══════════════════════════════════════════════════════════════════ */}
       <div className="sw-rule" />
       <div className="sw-section">
-        <div
-          ref={sec4.ref}
-          className={`caps-section reveal${sec4.visible ? " show" : ""}`}
-        >
+        <div ref={sec4.ref} className={`caps-section reveal${sec4.visible ? " show" : ""}`}>
           <div className="sw-section-tag">↳ Capabilities</div>
-          <h2 className="sw-section-h2">
-            Three capabilities. One coherent operating picture.
-          </h2>
+          <h2 className="sw-section-h2">Three capabilities. One coherent operating picture.</h2>
           <div className="sw-tabs-wrap">
             <div className="sw-tabs-bar">
               {tabs.map((t, i) => (
@@ -1257,33 +1340,24 @@ function Index() {
         </div>
       </div>
 
-
       {/* ══════════════════════════════════════════════════════════════════ */}
       {/* AI+HUMAN LOOP                                                       */}
       {/* ══════════════════════════════════════════════════════════════════ */}
       <div className="sw-rule" id="loop" />
       <div className="sw-section">
-        <div
-          ref={sec5.ref}
-          className={`loop-section reveal${sec5.visible ? " show" : ""}`}
-        >
+        <div ref={sec5.ref} className={`loop-section reveal${sec5.visible ? " show" : ""}`}>
           <div className="sw-section-tag">↳ AI+Human Loop Decision</div>
-          <h2 className="sw-section-h2">
-            AI+Human loop decision making
-          </h2>
+          <h2 className="sw-section-h2">AI+Human loop decision making</h2>
           <p className="sw-section-body">
-            The loop never closes without a human checkpoint. Every AI
-            recommendation is inspectable, overrideable, and teaches the system
-            to be better next time.
+            The loop never closes without a human checkpoint. Every AI recommendation is
+            inspectable, overrideable, and teaches the system to be better next time.
           </p>
           <div className="loop-steps">
             {loopSteps.map((s, i) => (
-              <div
-                key={i}
-                className="loop-step"
-                style={{ transitionDelay: `${i * 60}ms` }}
-              >
-                <div className="loop-ico"><s.icon size={28} strokeWidth={1.5} /></div>
+              <div key={i} className="loop-step" style={{ transitionDelay: `${i * 60}ms` }}>
+                <div className="loop-ico">
+                  <s.icon size={28} strokeWidth={1.5} />
+                </div>
                 <div className="loop-lbl">{s.step}</div>
                 <div className="loop-desc">{s.desc}</div>
               </div>
@@ -1292,7 +1366,6 @@ function Index() {
         </div>
       </div>
 
-
       {/* ══════════════════════════════════════════════════════════════════ */}
       {/* QUOTE                                                              */}
       {/* ══════════════════════════════════════════════════════════════════ */}
@@ -1300,8 +1373,8 @@ function Index() {
       <div className="quote-strip">
         <span className="quote-mark">"</span>
         <p className="quote-text">
-          The most powerful decisions emerge when AI amplifies human judgment
-          — not when it replaces it.
+          The most powerful decisions emerge when AI amplifies human judgment — not when it replaces
+          it.
         </p>
         <div className="quote-attr">— Agorix Software Design Principles</div>
       </div>
@@ -1310,18 +1383,17 @@ function Index() {
       {/* RECOGNITION (Palantir-style awards)                                */}
       {/* ══════════════════════════════════════════════════════════════════ */}
       <div className="sw-rule" />
-      
 
       {/* ══════════════════════════════════════════════════════════════════ */}
       {/* CTA BAND                                                           */}
       {/* ══════════════════════════════════════════════════════════════════ */}
       <div className="sw-section" id="contact">
         <div className="cta-band">
-          <h2 className="cta-heading">
-            Ready to get AI into your operations?
-          </h2>
+          <h2 className="cta-heading">Ready to get AI into your operations?</h2>
           <div className="cta-actions">
-            <a href="/demo" className="btn-white">SCHEDULE A DEMO</a>
+            <a href="/demo" className="btn-white">
+              SCHEDULE A DEMO
+            </a>
             {/* <a href="#bootcamp" className="btn-ghost">RUN A BOOTCAMP</a> */}
           </div>
         </div>
@@ -1369,10 +1441,7 @@ function PlatformCard({
       <a href="#contact" className="sw-card-cta" style={{ color: accent }}>
         {cta} →
       </a>
-      <div
-        className="sw-card-line"
-        style={{ background: accent }}
-      />
+      <div className="sw-card-line" style={{ background: accent }} />
     </div>
   );
 }

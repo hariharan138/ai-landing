@@ -1,21 +1,41 @@
-import {
-  Eye,
-  Recycle,
-  ShoppingBag,
-  FileText,
-  Zap,
-  Database,
-  TrendingUp,
-} from "lucide-react";
+import { Eye, Recycle, ShoppingBag, FileText, Zap, Database, TrendingUp } from "lucide-react";
 
 const objectives = [
-  { icon: Eye, title: "Operational Visibility", desc: "See every branch, every metric, in one pane of glass." },
-  { icon: Recycle, title: "Cut Wastage & Shortages", desc: "Lower spoilage and end stock-outs with predictive par levels." },
-  { icon: ShoppingBag, title: "Smarter Purchasing", desc: "Buy what you'll actually sell — not what you guessed last week." },
-  { icon: FileText, title: "Less Manual Reporting", desc: "Auto-generated daily, weekly, and monthly reports on WhatsApp." },
-  { icon: Zap, title: "Faster Response", desc: "Real-time alerts surface issues the moment they happen." },
-  { icon: Database, title: "Data-Driven Decisions", desc: "Replace gut-feel with clean, reconciled numbers." },
-  { icon: TrendingUp, title: "Higher Profitability", desc: "Tighten margins through cost control and menu engineering." },
+  {
+    icon: Eye,
+    title: "Operational Visibility",
+    desc: "See every branch, every metric, in one pane of glass.",
+  },
+  {
+    icon: Recycle,
+    title: "Cut Wastage & Shortages",
+    desc: "Lower spoilage and end stock-outs with predictive par levels.",
+  },
+  {
+    icon: ShoppingBag,
+    title: "Smarter Purchasing",
+    desc: "Buy what you'll actually sell — not what you guessed last week.",
+  },
+  {
+    icon: FileText,
+    title: "Less Manual Reporting",
+    desc: "Auto-generated daily, weekly, and monthly reports on WhatsApp.",
+  },
+  {
+    icon: Zap,
+    title: "Faster Response",
+    desc: "Real-time alerts surface issues the moment they happen.",
+  },
+  {
+    icon: Database,
+    title: "Data-Driven Decisions",
+    desc: "Replace gut-feel with clean, reconciled numbers.",
+  },
+  {
+    icon: TrendingUp,
+    title: "Higher Profitability",
+    desc: "Tighten margins through cost control and menu engineering.",
+  },
 ];
 
 export function Objectives() {

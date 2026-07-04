@@ -56,9 +56,7 @@ export function MockDashboard() {
                 <div
                   key={s.label}
                   className={`flex items-center gap-2 rounded-lg px-2.5 py-2 text-xs font-medium ${
-                    s.active
-                      ? "bg-primary-soft text-primary-dark"
-                      : "text-muted-foreground"
+                    s.active ? "bg-primary-soft text-primary-dark" : "text-muted-foreground"
                   }`}
                 >
                   <s.icon className="h-3.5 w-3.5" />
@@ -86,8 +84,12 @@ export function MockDashboard() {
               <div className="mb-3 flex items-center justify-between">
                 <div className="text-xs font-semibold">Revenue vs Food Cost</div>
                 <div className="flex items-center gap-3 text-[10px] text-muted-foreground">
-                  <span className="flex items-center gap-1"><span className="h-2 w-2 rounded-sm bg-white" /> Revenue</span>
-                  <span className="flex items-center gap-1"><span className="h-2 w-2 rounded-sm bg-white/50" /> Cost %</span>
+                  <span className="flex items-center gap-1">
+                    <span className="h-2 w-2 rounded-sm bg-white" /> Revenue
+                  </span>
+                  <span className="flex items-center gap-1">
+                    <span className="h-2 w-2 rounded-sm bg-white/50" /> Cost %
+                  </span>
                 </div>
               </div>
               <div className="flex h-28 items-end justify-between gap-2">

@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, Calendar, Check } from "lucide-react";
+import { ArrowRight, Calendar, Check, Loader2 } from "lucide-react";
+
+const GOOGLE_SCRIPT_URL = import.meta.env.VITE_GOOGLE_SCRIPT_URL;
 
 export const Route = createFileRoute("/demo")({
   component: DemoPage,
@@ -30,11 +32,57 @@ export const Route = createFileRoute("/demo")({
 
 function DemoPage() {
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const [form, setForm] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    restaurant: "",
+    phone: "",
+    posSystem: "",
+    message: "",
+  });
+
+  const update =
+    (field: keyof typeof form) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
+      setForm((f) => ({ ...f, [field]: e.target.value }));
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
+    setLoading(true);
+    setError("");
+
+    try {
+      const res = await fetch(GOOGLE_SCRIPT_URL, {
+        method: "POST",
+        mode: "no-cors",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          firstName: form.firstName,
+          lastName: form.lastName,
+          email: form.email,
+          restaurant: form.restaurant,
+          phone: form.phone,
+          posSystem: form.posSystem,
+          message: form.message,
+          submittedAt: new Date().toISOString(),
+        }),
+      });
+
+      // no-cors returns opaque response, so we can't check res.ok
+      // If the fetch didn't throw, we treat it as success
+      setSubmitted(true);
+    } catch {
+      setError("Something went wrong. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
+
+  const inputClass =
+    "w-full rounded-lg border border-white/10 bg-white/5 px-4 py-3 text-sm text-white placeholder-white/30 outline-none focus:border-purple-400/50 focus:ring-1 focus:ring-purple-400/20 transition";
 
   return (
     <div
@@ -74,8 +122,8 @@ function DemoPage() {
               </span>
             </h1>
             <p className="text-white/60 max-w-xl mx-auto">
-              Fill out the form below and we'll schedule a live walkthrough
-              tailored to your restaurant's needs.
+              Fill out the form below and we'll schedule a live walkthrough tailored to your
+              restaurant's needs.
             </p>
           </div>
 
@@ -110,7 +158,9 @@ function DemoPage() {
                     <input
                       type="text"
                       required
-                      className="w-full rounded-lg border border-white/10 bg-white/5 px-4 py-3 text-sm text-white placeholder-white/30 outline-none focus:border-purple-400/50 focus:ring-1 focus:ring-purple-400/20 transition"
+                      value={form.firstName}
+                      onChange={update("firstName")}
+                      className={inputClass}
                       placeholder="John"
                     />
                   </div>
@@ -121,20 +171,22 @@ function DemoPage() {
                     <input
                       type="text"
                       required
-                      className="w-full rounded-lg border border-white/10 bg-white/5 px-4 py-3 text-sm text-white placeholder-white/30 outline-none focus:border-purple-400/50 focus:ring-1 focus:ring-purple-400/20 transition"
+                      value={form.lastName}
+                      onChange={update("lastName")}
+                      className={inputClass}
                       placeholder="Doe"
                     />
                   </div>
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-white/80 mb-2">
-                    Work email
-                  </label>
+                  <label className="block text-sm font-medium text-white/80 mb-2">Work email</label>
                   <input
                     type="email"
                     required
-                    className="w-full rounded-lg border border-white/10 bg-white/5 px-4 py-3 text-sm text-white placeholder-white/30 outline-none focus:border-purple-400/50 focus:ring-1 focus:ring-purple-400/20 transition"
+                    value={form.email}
+                    onChange={update("email")}
+                    className={inputClass}
                     placeholder="john@restaurant.com"
                   />
                 </div>
@@ -146,7 +198,9 @@ function DemoPage() {
                   <input
                     type="text"
                     required
-                    className="w-full rounded-lg border border-white/10 bg-white/5 px-4 py-3 text-sm text-white placeholder-white/30 outline-none focus:border-purple-400/50 focus:ring-1 focus:ring-purple-400/20 transition"
+                    value={form.restaurant}
+                    onChange={update("restaurant")}
+                    className={inputClass}
                     placeholder="Your Restaurant"
                   />
                 </div>
@@ -157,7 +211,9 @@ function DemoPage() {
                   </label>
                   <input
                     type="tel"
-                    className="w-full rounded-lg border border-white/10 bg-white/5 px-4 py-3 text-sm text-white placeholder-white/30 outline-none focus:border-purple-400/50 focus:ring-1 focus:ring-purple-400/20 transition"
+                    value={form.phone}
+                    onChange={update("phone")}
+                    className={inputClass}
                     placeholder="+1 (555) 000-0000"
                   />
                 </div>
@@ -168,7 +224,9 @@ function DemoPage() {
                   </label>
                   <input
                     type="text"
-                    className="w-full rounded-lg border border-white/10 bg-white/5 px-4 py-3 text-sm text-white placeholder-white/30 outline-none focus:border-purple-400/50 focus:ring-1 focus:ring-purple-400/20 transition"
+                    value={form.posSystem}
+                    onChange={update("posSystem")}
+                    className={inputClass}
                     placeholder="e.g. Tally, Petpooja, Toast"
                   />
                 </div>
@@ -179,20 +237,31 @@ function DemoPage() {
                   </label>
                   <textarea
                     rows={3}
-                    className="w-full rounded-lg border border-white/10 bg-white/5 px-4 py-3 text-sm text-white placeholder-white/30 outline-none focus:border-purple-400/50 focus:ring-1 focus:ring-purple-400/20 transition resize-none"
+                    value={form.message}
+                    onChange={update("message")}
+                    className={`${inputClass} resize-none`}
                     placeholder="Tell us what you'd like to see in the demo..."
                   />
                 </div>
 
+                {error && <p className="text-red-400 text-sm text-center">{error}</p>}
+
                 <button
                   type="submit"
-                  className="group inline-flex w-full items-center justify-center gap-2 rounded-full bg-gradient-to-b from-white via-white/95 to-white/60 px-6 py-3.5 text-sm font-semibold text-black transition hover:scale-[1.02] active:scale-[0.98]"
+                  disabled={loading}
+                  className="group inline-flex w-full items-center justify-center gap-2 rounded-full bg-gradient-to-b from-white via-white/95 to-white/60 px-6 py-3.5 text-sm font-semibold text-black transition hover:scale-[1.02] active:scale-[0.98] disabled:opacity-60 disabled:hover:scale-100"
                 >
-                  Schedule My Demo
-                  <ArrowRight
-                    size={16}
-                    className="transition group-hover:translate-x-0.5"
-                  />
+                  {loading ? (
+                    <>
+                      <Loader2 size={16} className="animate-spin" />
+                      Submitting...
+                    </>
+                  ) : (
+                    <>
+                      Schedule My Demo
+                      <ArrowRight size={16} className="transition group-hover:translate-x-0.5" />
+                    </>
+                  )}
                 </button>
 
                 <p className="text-center text-xs text-white/40">

@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { NavBar } from "@/components/NavBar";
+import { AgorixNav } from "@/components/AgorixNav";
 import { Hero } from "@/components/restaurant-iq/Hero";
 import { StatsBar } from "@/components/restaurant-iq/StatsBar";
 import { Features } from "@/components/restaurant-iq/Features";
@@ -46,7 +46,14 @@ function RestaurantIQ() {
       className="min-h-screen restaurant-iq"
       style={{ background: "#111113", color: "#fff", fontFamily: "'Inter', system-ui, sans-serif" }}
     >
-      <NavBar />
+      <AgorixNav
+        sticky
+        links={[
+          { label: "Product", dropdown: [{ label: "Restaurant IQ", href: "/restaurant-iq" }] },
+          { label: "Pricing", href: "#pricing" },
+          { label: "Resources", href: "/software" },
+        ]}
+      />
       <main>
         <Hero />
         {/* <StatsBar /> */}
